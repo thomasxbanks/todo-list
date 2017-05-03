@@ -25,6 +25,9 @@
 						<input type="text" placeholder="Buy milk" autofocus class="text-input" v-model="newTask" v-on:keyup.enter="addTask">
 					</td>
 					<td class="wrapper_button">
+						<button class="add material-icons" v-on:click="addTask(task)">add</button>
+					</td>
+					<td class="wrapper_button">
 						<label for="mark-all">
 							<input type="checkbox" id="mark-all" v-bind:checked="areAllSelected" v-on:click="selectAll">
 							<span v-if="!areAllSelected" class="complete material-icons">done_all</span>
@@ -49,26 +52,43 @@
 		</section>
 
 		<ul class="list">
-			<li v-for="(task, index) in taskList" v-bind:class="{done: task.checked}">
-				<label :for="['complete-' + index]">
-					<table>
-						<tr>
-							<td rowspan="2" class="wrapper_priority">{{index + 1}}</td>
-							<td class="wrapper_added">{{task.added}}</td>
-							<td rowspan="2" class="wrapper_button"><input type="checkbox" class="checkbox" v-model="task.checked" :id="['complete-' + index]">
-							<span v-if="!task.checked" class="complete material-icons">done</span>
-							<span v-else class="complete material-icons">undo</span></td>
-							<td rowspan="2" class="wrapper_button"><button class="remove material-icons" v-on:click="removeTask(task)">delete</button></td>
-						</tr>
-						<tr>
-							<td class="wrapper_text">{{task.text}}</td>
+			<li v-for="(task, index) in taskList" :class="{done: task.checked, edit: task.edit}">
 
-						</tr>
-					</table>
+				<table>
+					<tr>
+						<td rowspan="3" class="wrapper_priority">{{index + 1}}</td>
+						<td class="wrapper_added">{{task.added}}</td>
+						<td rowspan="2" class="wrapper_button">
+
+							<button v-if="!task.edit" class="edit material-icons" v-on:click="editTask(task)">mode_edit</button>
+							<button v-else class="clear material-icons" v-on:click="editTask(task)">clear</button>
+
+						</td>
+						<td rowspan="2" class="wrapper_button">
+							<label :for="['complete-' + index]">
+								<input type="checkbox" class="checkbox" v-model="task.checked" :id="['complete-' + index]">
+								<span v-if="!task.checked" class="complete material-icons">done</span>
+								<span v-else class="complete material-icons">undo</span>
+							</label>
+						</td>
+						<td rowspan="2" class="wrapper_button"><button class="remove material-icons" v-on:click="removeTask(task)">delete</button></td>
+					</tr>
+					<tr>
+						<td class="wrapper_text">{{task.text}}</td>
+					</tr>
+					<tr v-if="task.edit">
+						<td class="wrapper_input" colspan="3">
+							<input type="text" :placeholder="[task.text]" autofocus class="text-input" v-model="thisTask" v-on:keyup.enter="replaceTask(task)">
+						</td>
+						<td class="wrapper_button">
+							<button class="add material-icons" v-on:click="replaceTask(task)">add</button>
+						</td>
+					</tr>
+				</table>
 
 
 
-				</label>
+
 
 			</li>
 		</ul>

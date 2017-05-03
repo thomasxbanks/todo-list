@@ -1,13 +1,13 @@
 //Create a new Vue instance
-new Vue({
+const TaskLister = new Vue({
 	//Bind this Vue instance to our container div with an ID of todo
 	el: "#todo",
 
 	//This is where we will register the values that hold data for our application
 	data: {
-
 		newTask: "",
-		taskList: []
+		taskList: [],
+		thisTask: ""
 	},
 
 	//This is where we will hold the methods we want to use in our application
@@ -32,15 +32,26 @@ new Vue({
 				this.taskList.push({
 					text: task,
 					added: dateFormatted,
-					checked: false
+					checked: false,
+					edit: false
 				});
 				//Reset newTask to an empty string so the input field is cleared
 				this.newTask = "";
 			}
 		},
 		removeTask: function(task) {
-			var index = this.taskList.indexOf(task);
-			this.taskList.splice(index, 1);
+			var index = this.taskList.indexOf(task)
+			this.taskList.splice(index, 1)
+		},
+		editTask: function(task) {
+			var index = this.taskList.indexOf(task)
+			this.taskList[index].edit = (this.taskList[index].edit) ? false : true
+		},
+		replaceTask: function(task) {
+			var index = this.taskList.indexOf(task)
+			this.taskList[index].text = TaskLister.thisTask
+			this.taskList[index].edit = false
+			this.taskList[index].checked = false
 		},
 		clearList: function() {
 			//Setting taskList to an empty array clears the whole list
@@ -51,7 +62,7 @@ new Vue({
 			var targetValue = this.areAllSelected ? false : true;
 			//we use a for loop to set the checked state of all items to the target value
 			for (var i = 0; i < this.taskList.length; i++) {
-				this.taskList[i].checked = targetValue;
+				this.taskList[i].checked = targetValue
 			}
 		},
 		reverseOrder: function() {
