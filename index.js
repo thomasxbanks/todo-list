@@ -5,6 +5,8 @@ const TaskLister = new Vue({
 
 	//This is where we will register the values that hold data for our application
 	data: {
+		user: "Thom",
+		greeting: (new Date().getHours() < 12) ? 'Good morning' : 'Hello',
 		hasTask: 0,
 		newTask: "",
 		taskList: [],
