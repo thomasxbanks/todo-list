@@ -18,8 +18,20 @@ new Vue({
 			//if task is not an empty string
 			if (task) {
 				//Push an object containing the task to the taskList array
+				let date = new Date
+				let d = {
+					yr: date.getFullYear(),
+					mo: (date.getMonth() <= 9) ? "0" + date.getMonth() : date.getMonth(),
+					dy: (date.getDate() <= 9) ? "0" + date.getDate() : date.getDate(),
+					hr: (date.getHours() <= 9) ? "0" + date.getHours() : date.getHours(),
+					mi: (date.getMinutes() <= 9) ? "0" + date.getMinutes() : date.getMinutes(),
+					se: (date.getSeconds() <= 9) ? "0" + date.getSeconds() : date.getSeconds()
+				}
+				let dateFormatted = d.dy + "/" + d.mo + "/" + d.yr + " (" + d.hr + ":" + d.mi + ":" + d.se + ")"
+
 				this.taskList.push({
 					text: task,
+					added: dateFormatted,
 					checked: false
 				});
 				//Reset newTask to an empty string so the input field is cleared
@@ -41,6 +53,17 @@ new Vue({
 			for (var i = 0; i < this.taskList.length; i++) {
 				this.taskList[i].checked = targetValue;
 			}
+		},
+		reverseOrder: function() {
+			console.log(this.taskList)
+			this.taskList.reverse()
+		},
+		sortByDate: function() {
+			console.log(this.taskList)
+			this.taskList.sort(function(a, b) {
+				return (a.added > b.added) ? 1 : ((b.added > a.added) ? -1 : 0);
+			})
+			this.taskList.reverse()
 		}
 	},
 	computed: {

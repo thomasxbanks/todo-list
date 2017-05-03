@@ -12,27 +12,64 @@
 
 <body>
 	<header>
-		<h1>To Do List</h1>
+		<div class="central-column">
+			<h1>To Do List</h1>
+		</div>
 	</header>
-	<main id="todo">
+	<main id="todo" class="central-column">
 		<section class="panel">
 			<label for="text-input">What do you need to do today?</label>
-			<input type="text" placeholder="Buy milk" autofocus class="text-input" v-model="newTask" v-on:keyup.enter="addTask">
-			<label for="mark-all"><input type="checkbox" id="mark-all" v-bind:checked="areAllSelected" v-on:click="selectAll">
-				<span v-if="!areAllSelected" class="complete material-icons">done_all</span>
-				<span v-else class="complete material-icons">undo</span>
-			</label>
-			<button class="material-icons remove" v-on:click="clearList">delete_sweep</button>
+			<table>
+				<tr>
+					<td class="wrapper_input">
+						<input type="text" placeholder="Buy milk" autofocus class="text-input" v-model="newTask" v-on:keyup.enter="addTask">
+					</td>
+					<td class="wrapper_button">
+						<label for="mark-all">
+							<input type="checkbox" id="mark-all" v-bind:checked="areAllSelected" v-on:click="selectAll">
+							<span v-if="!areAllSelected" class="complete material-icons">done_all</span>
+							<span v-else class="complete material-icons">undo</span>
+						</label>
+					</td>
+					<td class="wrapper_button">
+						<button class="material-icons remove" v-on:click="clearList">delete_sweep</button>
+					</td>
+				</tr>
+			</table>
 		</section>
+		<section class="filter">
+			<table>
+				<tr>
+					<td class="wrapper_button"><button class="material-icons sort" v-on:click="reverseOrder">swap_vert</button></td>
+					<td class="wrapper_label">Swap order</td>
+					<td class="wrapper_button"><button class="material-icons sort" v-on:click="sortByDate">sort</button></td>
+					<td class="wrapper_label">Most recent</td>
+				</tr>
+			</table>
+		</section>
+
 		<ul class="list">
 			<li v-for="(task, index) in taskList" v-bind:class="{done: task.checked}">
 				<label :for="['complete-' + index]">
-					<span class="text">{{index + 1}} - {{ task.text }}</span>
-					<input type="checkbox" class="checkbox" v-model="task.checked" :id="['complete-' + index]">
-					<span v-if="!task.checked" class="complete material-icons">done</span>
-					<span v-else class="complete material-icons">undo</span>
+					<table>
+						<tr>
+							<td rowspan="2" class="wrapper_priority">{{index + 1}}</td>
+							<td class="wrapper_added">{{task.added}}</td>
+							<td rowspan="2" class="wrapper_button"><input type="checkbox" class="checkbox" v-model="task.checked" :id="['complete-' + index]">
+							<span v-if="!task.checked" class="complete material-icons">done</span>
+							<span v-else class="complete material-icons">undo</span></td>
+							<td rowspan="2" class="wrapper_button"><button class="remove material-icons" v-on:click="removeTask(task)">delete</button></td>
+						</tr>
+						<tr>
+							<td class="wrapper_text">{{task.text}}</td>
+
+						</tr>
+					</table>
+
+
+
 				</label>
-				<button class="remove material-icons" v-on:click="removeTask(task)">delete</button>
+
 			</li>
 		</ul>
 	</main>
