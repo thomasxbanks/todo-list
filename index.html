@@ -59,23 +59,23 @@
 					<tr>
 						<td rowspan="3" class="wrapper_priority">{{index + 1}}</td>
 						<td class="wrapper_added">{{task.added}}</td>
-						<td rowspan="2" class="wrapper_button">
+						<td rowspan="1" class="wrapper_button">
 
 							<button v-if="!task.edit" class="edit material-icons" v-on:click="editTask(task)">mode_edit</button>
 							<button v-else class="clear material-icons" v-on:click="editTask(task)">clear</button>
 
 						</td>
-						<td rowspan="2" class="wrapper_button">
+						<td rowspan="1" class="wrapper_button">
 							<label :for="['complete-' + index]">
 								<input type="checkbox" class="checkbox" v-model="task.checked" :id="['complete-' + index]">
 								<span v-if="!task.checked" class="complete material-icons">done</span>
 								<span v-else class="complete material-icons">undo</span>
 							</label>
 						</td>
-						<td rowspan="2" class="wrapper_button"><button class="remove material-icons" v-on:click="removeTask(task)">delete</button></td>
+						<td rowspan="1" class="wrapper_button"><button class="remove material-icons" v-on:click="removeTask(task)">delete</button></td>
 					</tr>
 					<tr>
-						<td class="wrapper_text">{{task.text}}</td>
+						<td colspan="3" class="wrapper_text">{{task.text}}</td>
 					</tr>
 					<tr v-if="task.edit">
 						<td class="wrapper_input" colspan="3">
