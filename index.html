@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>to do list</title>
+	<link rel="stylesheet" href="index.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+	<header>
+		<h1>To Do List</h1>
+	</header>
+	<main id="todo">
+		<section class="panel">
+			<label for="text-input">What do you need to do today?</label>
+			<input type="text" placeholder="Buy milk" autofocus class="text-input" v-model="newTask" v-on:keyup.enter="addTask">
+			<label for="mark-all"><input type="checkbox" id="mark-all" v-bind:checked="areAllSelected" v-on:click="selectAll">
+				<span v-if="!areAllSelected" class="complete material-icons">done_all</span>
+				<span v-else class="complete material-icons">undo</span>
+			</label>
+			<button class="material-icons remove" v-on:click="clearList">delete_sweep</button>
+		</section>
+		<ul class="list">
+			<li v-for="(task, index) in taskList" v-bind:class="{done: task.checked}">
+				<label :for="['complete-' + index]">
+					<span class="text">{{index + 1}} - {{ task.text }}</span>
+					<input type="checkbox" class="checkbox" v-model="task.checked" :id="['complete-' + index]">
+					<span v-if="!task.checked" class="complete material-icons">done</span>
+					<span v-else class="complete material-icons">undo</span>
+				</label>
+				<button class="remove material-icons" v-on:click="removeTask(task)">delete</button>
+			</li>
+		</ul>
+	</main>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.js"></script>
+	<script src="index.js" charset="utf-8"></script>
+</body>
+
+</html>
