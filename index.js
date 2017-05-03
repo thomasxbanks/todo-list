@@ -5,6 +5,7 @@ const TaskLister = new Vue({
 
 	//This is where we will register the values that hold data for our application
 	data: {
+		hasTask: 0,
 		newTask: "",
 		taskList: [],
 		thisTask: ""
@@ -13,11 +14,13 @@ const TaskLister = new Vue({
 	//This is where we will hold the methods we want to use in our application
 	methods: {
 		addTask: function() {
+			this.hasTask++
 			//trim() is used to remove whitespace from both ends of a string
 			var task = this.newTask.trim();
 			//if task is not an empty string
 			if (task) {
 				//Push an object containing the task to the taskList array
+
 				let date = new Date
 				let d = {
 					yr: date.getFullYear(),
@@ -34,7 +37,8 @@ const TaskLister = new Vue({
 					added: dateFormatted,
 					checked: false,
 					edit: false
-				});
+				})
+
 				//Reset newTask to an empty string so the input field is cleared
 				this.newTask = "";
 			}
@@ -42,6 +46,7 @@ const TaskLister = new Vue({
 		removeTask: function(task) {
 			var index = this.taskList.indexOf(task)
 			this.taskList.splice(index, 1)
+			this.hasTask--
 		},
 		editTask: function(task) {
 			var index = this.taskList.indexOf(task)
@@ -55,7 +60,8 @@ const TaskLister = new Vue({
 		},
 		clearList: function() {
 			//Setting taskList to an empty array clears the whole list
-			this.taskList = [];
+			this.taskList = []
+			this.hasTask = 0
 		},
 		selectAll: function(task) {
 			//targetValue is set to the opposite of areAllSelected

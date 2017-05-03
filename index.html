@@ -40,7 +40,8 @@
 				</tr>
 			</table>
 		</section>
-		<section class="filter">
+
+		<section class="filter" v-if="hasTask > 1">
 			<table>
 				<tr>
 					<td class="wrapper_button"><button class="material-icons sort" v-on:click="reverseOrder">swap_vert</button></td>
