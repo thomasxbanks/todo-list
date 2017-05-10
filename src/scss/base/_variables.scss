@@ -18,10 +18,10 @@ $clr_white: #fafaff;
 
 $clr_brand: #334455;
 
-$clr_error: hsb(0, 100, 50);
-$clr_success: hsb(120, 100, 50);
-$clr_warning: hsb(30, 100, 50);
-
+$clr_error: #aa000f;
+$clr_success: #00aa0f;
+$clr_warning: #faaa0f;
+$clr_neutral: #eaeaef;
 
 // Face Stack/Family
 @import url('https://fonts.googleapis.com/css?family=Fira+Sans+Condensed|Raleway');

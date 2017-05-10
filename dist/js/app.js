@@ -161,6 +161,9 @@ var TaskLister = new Vue({
 			this.taskList = [];
 			this.hasTask = 0;
 		},
+		clearCompleted: function clearCompleted() {
+			this.taskList = this.taskList.filter(this.inProgress);
+		},
 		selectAll: function selectAll(task) {
 			var targetValue = this.areAllSelected ? false : true;
 			for (var i = 0; i < this.taskList.length; i++) {
@@ -175,6 +178,12 @@ var TaskLister = new Vue({
 				return a.added > b.added ? 1 : b.added > a.added ? -1 : 0;
 			});
 			this.taskList.reverse();
+		},
+		isCompleted: function isCompleted(task) {
+			return task.checked;
+		},
+		inProgress: function inProgress(task) {
+			return !this.isCompleted(task);
 		}
 	},
 	computed: {
@@ -185,7 +194,6 @@ var TaskLister = new Vue({
 		},
 		greeting: function greeting() {
 			var thisHour = new Date().getHours();
-			console.log(thisHour);
 			if (thisHour < 12) {
 				return 'Good morning';
 			} else if (thisHour > 18) {
@@ -197,9 +205,7 @@ var TaskLister = new Vue({
 			}
 		},
 		remainingTasks: function remainingTasks() {
-			return this.taskList.filter(function (task) {
-				return !task.checked;
-			}).length;
+			return this.taskList.filter(this.inProgress).length;
 		}
 	}
 });

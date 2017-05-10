@@ -60,6 +60,9 @@ const TaskLister = new Vue({
 			this.taskList = []
 			this.hasTask = 0
 		},
+		clearCompleted: function(){
+			this.taskList = this.taskList.filter(this.inProgress)
+		},
 		selectAll: function(task) {
 			var targetValue = this.areAllSelected ? false : true
 			for (var i = 0; i < this.taskList.length; i++) {
@@ -74,6 +77,12 @@ const TaskLister = new Vue({
 				return (a.added > b.added) ? 1 : ((b.added > a.added) ? -1 : 0)
 			})
 			this.taskList.reverse()
+		},
+		isCompleted: function(task){
+			return task.checked
+		},
+		inProgress: function(task) {
+			return !this.isCompleted(task)
 		}
 	},
 	computed: {
@@ -84,7 +93,6 @@ const TaskLister = new Vue({
 		},
 		greeting: function() {
 			let thisHour = new Date().getHours()
-			console.log(thisHour)
 			if (thisHour < 12) {
 				return 'Good morning'
 			} else if (thisHour > 18) {
@@ -96,9 +104,7 @@ const TaskLister = new Vue({
 			}
 		},
 		remainingTasks: function(){
-			return this.taskList.filter(function(task){
-				return !task.checked
-			}).length
+			return this.taskList.filter(this.inProgress).length
 		}
 	}
 })

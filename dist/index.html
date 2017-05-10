@@ -18,7 +18,7 @@
 	</header>
 	<main id="todo" class="central-column">
 		<section class="panel">
-			<label for="text-input">{{greeting}}! What do you need to do today?</label>
+			<label for="text-input">{{greeting}}, {{user}}! What do you need to do today?</label>
 			<table>
 				<tr>
 					<td class="wrapper_input">
@@ -35,7 +35,10 @@
 						</label>
 					</td>
 					<td class="wrapper_button">
-						<button class="material-icons remove" @click="clearList" v-if="hasTask">delete_sweep</button>
+						<button class="material-icons remove" @click="clearCompleted" v-if="hasTask">delete_sweep</button>
+					</td>
+					<td class="wrapper_button">
+						<button class="material-icons destroy" @click="clearList" v-if="hasTask">delete_forever</button>
 					</td>
 				</tr>
 			</table>
@@ -53,8 +56,11 @@
 		</section>
 
 		<section v-if="hasTask > 0">
+			<hr />
 			<h2>Your list</h2>
-			<p>{{ remainingTasks }} task<span v-if="remainingTasks > 1">s</span> remaining</p>
+			<p class="message" :class="(remainingTasks === 0) ? 'message-success' : message-neutral">
+				{{ remainingTasks }} task<span v-if="remainingTasks !== 1">s</span> remaining
+			</p>
 			<ul class="list">
 				<li v-for="(task, index) in taskList" :class="{done: task.checked, edit: task.edit}">
 					<table>
@@ -90,6 +96,11 @@
 					</table>
 				</li>
 			</ul>
+		</section>
+		<section v-else class="message message-neutral">
+			<p>
+				You do not have any tasks
+			</p>
 		</section>
 	</main>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
