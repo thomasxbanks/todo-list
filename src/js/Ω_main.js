@@ -16,7 +16,7 @@ const TaskLister = new Vue({
 		addTask: function() {
 			this.hasTask++
 
-			var task = this.newTask.trim()
+				var task = this.newTask.trim()
 
 			if (task) {
 
@@ -60,7 +60,7 @@ const TaskLister = new Vue({
 			this.taskList = []
 			this.hasTask = 0
 		},
-		clearCompleted: function(){
+		clearCompleted: function() {
 			this.taskList = this.taskList.filter(this.inProgress)
 		},
 		selectAll: function(task) {
@@ -78,7 +78,7 @@ const TaskLister = new Vue({
 			})
 			this.taskList.reverse()
 		},
-		isCompleted: function(task){
+		isCompleted: function(task) {
 			return task.checked
 		},
 		inProgress: function(task) {
@@ -103,7 +103,7 @@ const TaskLister = new Vue({
 				return 'Good afternoon'
 			}
 		},
-		remainingTasks: function(){
+		remainingTasks: function() {
 			return this.taskList.filter(this.inProgress).length
 		}
 	}
