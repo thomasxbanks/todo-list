@@ -1,8 +1,7 @@
+"use strict"
 
 const TaskLister = new Vue({
-
 	el: "#todo",
-
 
 	data: {
 		user: "Thom",
@@ -83,18 +82,23 @@ const TaskLister = new Vue({
 				return task.checked
 			}) && this.taskList.length > 0
 		},
-        greeting: function(){
-            let thisHour = new Date().getHours()
-            console.log(thisHour)
-            if (thisHour < 12) {
-                return 'Good morning'
-            } else if (thisHour > 18) {
-                return 'Good evening'
-            } else if (thisHour > 21) {
-                return 'Good night'
-            } else {
-                return 'Good afternoon'
-            }
-        }
+		greeting: function() {
+			let thisHour = new Date().getHours()
+			console.log(thisHour)
+			if (thisHour < 12) {
+				return 'Good morning'
+			} else if (thisHour > 18) {
+				return 'Good evening'
+			} else if (thisHour > 21) {
+				return 'Good night'
+			} else {
+				return 'Good afternoon'
+			}
+		},
+		remainingTasks: function(){
+			return this.taskList.filter(function(task){
+				return !task.checked
+			}).length
+		}
 	}
 })
