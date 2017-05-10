@@ -22,20 +22,20 @@
 			<table>
 				<tr>
 					<td class="wrapper_input">
-						<input type="text" placeholder="Buy milk" autofocus class="text-input" v-model="newTask" v-on:keyup.enter="addTask">
+						<input type="text" placeholder="Buy milk" autofocus class="text-input" v-model="newTask" @keyup.enter="addTask">
 					</td>
 					<td class="wrapper_button">
-						<button class="add material-icons" v-on:click="addTask(task)" v-if="newTask.length > 0">add</button>
+						<button class="add material-icons" @click="addTask(task)" v-if="newTask.length > 0">add</button>
 					</td>
 					<td class="wrapper_button">
 						<label for="mark-all" v-if="hasTask">
-							<input type="checkbox" id="mark-all" v-bind:checked="areAllSelected" v-on:click="selectAll">
+							<input type="checkbox" id="mark-all" v-bind:checked="areAllSelected" @click="selectAll">
 							<span v-if="!areAllSelected" class="complete material-icons">done_all</span>
 							<span v-else class="complete material-icons">undo</span>
 						</label>
 					</td>
 					<td class="wrapper_button">
-						<button class="material-icons remove" v-on:click="clearList" v-if="hasTask">delete_sweep</button>
+						<button class="material-icons remove" @click="clearList" v-if="hasTask">delete_sweep</button>
 					</td>
 				</tr>
 			</table>
@@ -44,9 +44,9 @@
 		<section class="filter" v-if="hasTask > 1">
 			<table>
 				<tr>
-					<td class="wrapper_button"><button class="material-icons sort" v-on:click="reverseOrder">swap_vert</button></td>
+					<td class="wrapper_button"><button class="material-icons sort" @click="reverseOrder">swap_vert</button></td>
 					<td class="wrapper_label">Swap order</td>
-					<td class="wrapper_button"><button class="material-icons sort" v-on:click="sortByDate">sort</button></td>
+					<td class="wrapper_button"><button class="material-icons sort" @click="sortByDate">sort</button></td>
 					<td class="wrapper_label">Most recent</td>
 				</tr>
 			</table>
@@ -61,8 +61,8 @@
 						<td class="wrapper_added">{{task.added}}</td>
 						<td rowspan="1" class="wrapper_button">
 
-							<button v-if="!task.edit" class="edit material-icons" v-on:click="editTask(task)">mode_edit</button>
-							<button v-else class="clear material-icons" v-on:click="editTask(task)">clear</button>
+							<button v-if="!task.edit" class="edit material-icons" @click="editTask(task)">mode_edit</button>
+							<button v-else class="clear material-icons" @click="editTask(task)">clear</button>
 
 						</td>
 						<td rowspan="1" class="wrapper_button">
@@ -72,17 +72,17 @@
 								<span v-else class="complete material-icons">undo</span>
 							</label>
 						</td>
-						<td rowspan="1" class="wrapper_button"><button class="remove material-icons" v-on:click="removeTask(task)">delete</button></td>
+						<td rowspan="1" class="wrapper_button"><button class="remove material-icons" @click="removeTask(task)">delete</button></td>
 					</tr>
 					<tr>
 						<td colspan="3" class="wrapper_text">{{task.text}}</td>
 					</tr>
 					<tr v-if="task.edit">
 						<td class="wrapper_input" colspan="3">
-							<input type="text" :placeholder="[task.text]" autofocus class="text-input" v-model="thisTask" v-on:keyup.enter="replaceTask(task)">
+							<input type="text" :placeholder="[task.text]" autofocus class="text-input" v-model="thisTask" @keyup.enter="replaceTask(task)">
 						</td>
 						<td class="wrapper_button">
-							<button class="add material-icons" v-on:click="replaceTask(task)">add</button>
+							<button class="add material-icons" @click="replaceTask(task)">add</button>
 						</td>
 					</tr>
 				</table>
