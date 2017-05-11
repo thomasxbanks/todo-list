@@ -46,6 +46,7 @@ $font_color-invert: $clr_white;
 // Transition Easings
 $ease-main: cubic-bezier(.66,.04,.51,.92);
 $ease-swoosh: cubic-bezier(.53,-0.4,.81,1.46);
+$ease-bounce: cubic-bezier(.43,-0.79,.32,1.54);
 
 // Transition Speeds
 $speed-fastest: 100ms;

@@ -1,3 +1,9 @@
+#wrapper_tasklist {
+	li {
+		transition: background $ease-main $speed-fast;
+	}
+}
+
 
 table {
 	border-spacing: 0;

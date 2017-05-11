@@ -60,18 +60,13 @@
 			<p class="message" :class="(remainingTasks === 0) ? 'message-success' : 'message-neutral'">
 				{{ remainingTasks }} task<span v-if="remainingTasks !== 1">s</span> remaining
 			</p>
-			<ul class="list">
+			<ul id="wrapper_tasklist" class="list">
 				<li v-for="(task, index) in taskList" :class="{done: task.checked, edit: task.edit}">
 					<table>
 						<tr>
 							<td rowspan="3" class="wrapper_priority">{{index + 1}}</td>
 							<td class="wrapper_added">{{task.added}}</td>
-							<td rowspan="1" class="wrapper_button">
 
-								<button v-if="!task.edit" class="edit material-icons" @click="editTask(task)">mode_edit</button>
-								<button v-else class="clear material-icons" @click="editTask(task)">clear</button>
-
-							</td>
 							<td rowspan="1" class="wrapper_button">
 								<label :for="['complete-' + index]">
 									<input type="checkbox" class="checkbox" v-model="task.checked" :id="['complete-' + index]">
@@ -79,7 +74,15 @@
 									<span v-else class="complete material-icons">undo</span>
 								</label>
 							</td>
-							<td rowspan="1" class="wrapper_button"><button class="remove material-icons" @click="removeTask(task)">delete</button></td>
+							<td rowspan="1" class="wrapper_button">
+
+								<button v-if="!task.edit" class="edit material-icons" @click="editTask(task)">mode_edit</button>
+								<button v-else class="clear material-icons" @click="editTask(task)">clear</button>
+
+							</td>
+							<td rowspan="1" class="wrapper_button">
+								<button class="remove material-icons" @click="removeTask(task)">delete</button>
+							</td>
 						</tr>
 						<tr>
 							<td colspan="4" class="wrapper_text">{{task.text}}</td>
