@@ -24,9 +24,9 @@ $clr_warning: #faaa0f;
 $clr_neutral: #eaeaef;
 
 // Face Stack/Family
-@import url('https://fonts.googleapis.com/css?family=Fira+Sans+Condensed|Raleway');
-$font_face-main: "Fira Sans Condensed", Arial, "Helvetica Neue", Helvetica, sans-serif;
-$font_face-accent: "Raleway", "Times New Roman", Times, Baskerville, Georgia, serif;
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans|Gloria+Hallelujah');
+$font_face-main: "Fira Sans", Arial, "Helvetica Neue", Helvetica, sans-serif;
+$font_face-accent: "Gloria Hallelujah", "Times New Roman", Times, Baskerville, Georgia, serif;
 
 // Font Sizes
 $font_size-xsm: ($b * 1);
