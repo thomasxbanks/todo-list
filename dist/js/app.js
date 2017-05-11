@@ -113,6 +113,20 @@ var TaskLister = new Vue({
 		thisTask: ""
 	},
 
+	created: function created() {
+		var _this = this;
+
+		var tasks = localStorage.getItem('tasks');
+		var taskJSON = JSON.parse(tasks);
+		// log for debug
+		//console.log(taskJSON)
+		taskJSON.forEach(function (task) {
+			// log for debug
+			console.log(task);
+			_this.taskList.push(task);
+		});
+	},
+
 	methods: {
 		addTask: function addTask() {
 			this.hasTask++;
@@ -138,7 +152,8 @@ var TaskLister = new Vue({
 					checked: false,
 					edit: false
 				});
-
+				localStorage.setItem('tasks', JSON.stringify(TaskLister.taskList));
+				console.log(localStorage);
 				this.newTask = "";
 			}
 		},
@@ -146,6 +161,7 @@ var TaskLister = new Vue({
 			var index = this.taskList.indexOf(task);
 			this.taskList.splice(index, 1);
 			this.hasTask--;
+			localStorage.setItem('tasks', JSON.stringify(TaskLister.taskList));
 		},
 		editTask: function editTask(task) {
 			var index = this.taskList.indexOf(task);
@@ -156,13 +172,16 @@ var TaskLister = new Vue({
 			this.taskList[index].text = TaskLister.thisTask;
 			this.taskList[index].edit = false;
 			this.taskList[index].checked = false;
+			localStorage.setItem('tasks', JSON.stringify(TaskLister.taskList));
 		},
 		clearList: function clearList() {
 			this.taskList = [];
 			this.hasTask = 0;
+			localStorage.setItem('tasks', JSON.stringify(TaskLister.taskList));
 		},
 		clearCompleted: function clearCompleted() {
 			this.taskList = this.taskList.filter(this.inProgress);
+			localStorage.setItem('tasks', JSON.stringify(TaskLister.taskList));
 		},
 		selectAll: function selectAll(task) {
 			var targetValue = this.areAllSelected ? false : true;
@@ -172,12 +191,14 @@ var TaskLister = new Vue({
 		},
 		reverseOrder: function reverseOrder() {
 			this.taskList.reverse();
+			localStorage.setItem('tasks', JSON.stringify(TaskLister.taskList));
 		},
 		sortByDate: function sortByDate() {
 			this.taskList.sort(function (a, b) {
 				return a.added > b.added ? 1 : b.added > a.added ? -1 : 0;
 			});
 			this.taskList.reverse();
+			localStorage.setItem('tasks', JSON.stringify(TaskLister.taskList));
 		},
 		isCompleted: function isCompleted(task) {
 			return task.checked;
