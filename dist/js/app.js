@@ -217,7 +217,7 @@ var TaskLister = new Vue({
 		},
 		storeData: function storeData() {
 			// log for debug
-			console.log('Storing data to localStorage');
+			console.log('Storing data to localStorage', TaskLister.taskList);
 			localStorage.setItem('tasks', JSON.stringify(TaskLister.taskList));
 		}
 	},

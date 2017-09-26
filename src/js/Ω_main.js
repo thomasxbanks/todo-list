@@ -33,7 +33,7 @@ const TaskLister = new Vue({
 		addTask: function() {
 			this.hasTask++
 
-				var task = this.newTask.trim()
+			var task = this.newTask.trim()
 
 			if (task) {
 
@@ -64,7 +64,7 @@ const TaskLister = new Vue({
 			var index = this.taskList.indexOf(task)
 			this.taskList.splice(index, 1)
 			this.hasTask--
-				this.storeData()
+			this.storeData()
 		},
 		editTask: function(task) {
 			var index = this.taskList.indexOf(task)
@@ -116,7 +116,7 @@ const TaskLister = new Vue({
 		},
 		storeData: function() {
 			// log for debug
-			console.log('Storing data to localStorage')
+			console.log('Storing data to localStorage', TaskLister.taskList)
 			localStorage.setItem('tasks', JSON.stringify(TaskLister.taskList))
 		}
 	},
