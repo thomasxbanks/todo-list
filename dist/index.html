@@ -57,8 +57,8 @@
 
 		<section v-if="hasTask > 0">
 			<h2>Your list</h2>
-			<p class="message" :class="(remainingTasks === 0) ? 'message-success' : 'message-neutral'">
-				{{ remainingTasks }} task<span v-if="remainingTasks !== 1">s</span> remaining
+			<p class="message" :class="(remainingTasks === 0) ? 'message-success' : ((remainingTasks >= 10) && (remainingTasks < 100)) ? 'message-warning' : (remainingTasks >= 100) ? 'message-error' : 'message-neutral'">
+				{{ remainingTasks }} task<span v-if="remainingTasks !== 1">s</span> remaining. <span v-if="remainingTasks === 0"><strong>Go you!</strong></span>
 			</p>
 			<ul id="wrapper_tasklist" class="list">
 				<li v-for="(task, index) in taskList" :class="{done: task.checked, edit: task.edit}">
@@ -102,7 +102,7 @@
 			</ul>
 		</section>
 		<p v-else :class="['message', 'message-neutral']">
-			You do not have any tasks
+			You do not have any tasks.
 		</p>
 	</main>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
