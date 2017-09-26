@@ -180,9 +180,13 @@ var TaskLister = new Vue({
 			this.storeData();
 		},
 		clearList: function clearList() {
-			this.taskList = [];
-			this.hasTask = 0;
-			this.storeData();
+			if (confirm('Are you sure you want to clear the list? This is unreversable.')) {
+				this.taskList = [];
+				this.hasTask = 0;
+				this.storeData();
+			} else {
+				// Do nothing!
+			}
 		},
 		clearCompleted: function clearCompleted() {
 			this.taskList = this.taskList.filter(this.inProgress);

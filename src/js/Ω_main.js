@@ -33,7 +33,7 @@ const TaskLister = new Vue({
 		addTask: function() {
 			this.hasTask++
 
-			var task = this.newTask.trim()
+				var task = this.newTask.trim()
 
 			if (task) {
 
@@ -64,7 +64,7 @@ const TaskLister = new Vue({
 			var index = this.taskList.indexOf(task)
 			this.taskList.splice(index, 1)
 			this.hasTask--
-            this.storeData()
+				this.storeData()
 		},
 		editTask: function(task) {
 			var index = this.taskList.indexOf(task)
@@ -75,16 +75,21 @@ const TaskLister = new Vue({
 			this.taskList[index].text = TaskLister.thisTask
 			this.taskList[index].edit = false
 			this.taskList[index].checked = false
-            this.storeData()
+			this.storeData()
 		},
 		clearList: function() {
-			this.taskList = []
-			this.hasTask = 0
-            this.storeData()
+			if (confirm('Are you sure you want to clear the list? This is unreversable.')) {
+				this.taskList = []
+				this.hasTask = 0
+				this.storeData()
+			} else {
+				// Do nothing!
+			}
+
 		},
 		clearCompleted: function() {
 			this.taskList = this.taskList.filter(this.inProgress)
-            this.storeData()
+			this.storeData()
 		},
 		selectAll: function(task) {
 			var targetValue = this.areAllSelected ? false : true
@@ -94,14 +99,14 @@ const TaskLister = new Vue({
 		},
 		reverseOrder: function() {
 			this.taskList.reverse()
-            this.storeData()
+			this.storeData()
 		},
 		sortByDate: function() {
 			this.taskList.sort(function(a, b) {
 				return (a.added > b.added) ? 1 : ((b.added > a.added) ? -1 : 0)
 			})
 			this.taskList.reverse()
-            this.storeData()
+			this.storeData()
 		},
 		isCompleted: function(task) {
 			return task.checked
@@ -109,7 +114,7 @@ const TaskLister = new Vue({
 		inProgress: function(task) {
 			return !this.isCompleted(task)
 		},
-		storeData: function(){
+		storeData: function() {
 			// log for debug
 			console.log('Storing data to localStorage')
 			localStorage.setItem('tasks', JSON.stringify(TaskLister.taskList))
