@@ -1,10 +1,11 @@
 .message {
     display: block;
     border-radius: $radius;
-    box-shadow: 0 0 1rem rgba($clr_black, 0.3);
+    box-shadow: $shadow;
     padding: 1rem;
     margin: 1rem 0;
     transition: background $ease-main $speed-fast;
+    line-height: 2;
     &-neutral {
         background: $clr_neutral;
         color: set-text-color($clr_neutral);

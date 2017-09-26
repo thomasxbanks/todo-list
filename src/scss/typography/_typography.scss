@@ -27,6 +27,7 @@ h6 {
 
 h1 {
     @extend .tony;
+    text-shadow: $shadow;
 }
 h2 {
     @extend .silvio;

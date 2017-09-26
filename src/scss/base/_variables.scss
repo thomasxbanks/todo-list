@@ -12,11 +12,11 @@ $b: $baseline;
 //  Colors
 $clr_black: #0a0a0f;
 $clr_grey-lt: #dadadf;
-$clr_grey-md: #a0a0af;
-$clr_grey-dk: #4a4a4f;
+$clr_grey-md: #afa0a0;
+$clr_grey-dk: #4f4a4a;
 $clr_white: #fafaff;
 
-$clr_brand: #334455;
+$clr_brand: #a1213d;
 
 $clr_error: #aa000f;
 $clr_success: #00aa0f;
@@ -55,4 +55,6 @@ $speed-std: 500ms;
 $speed-slow: 800ms;
 $speed-slowest: 1000ms;
 
-$radius: 0.15rem;
+$radius: 0.125rem;
+
+$shadow: 0.125rem 0.125rem 0.125rem rgba($clr_black, 0.3);
