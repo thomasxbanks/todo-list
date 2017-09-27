@@ -22,7 +22,7 @@
 			<table>
 				<tr>
 					<td class="wrapper_input">
-						<input type="text" placeholder="Buy milk" autofocus class="text-input" v-model="newTask" @keyup.enter="addTask">
+						<input type="text" placeholder="Buy milk" autofocus class="text-input" id="text-input" name="text-input" v-model="newTask" @keyup.enter="addTask">
 					</td>
 					<td class="wrapper_button">
 						<button class="add material-icons" @click="addTask(task)" v-if="newTask.length > 0">add</button>
