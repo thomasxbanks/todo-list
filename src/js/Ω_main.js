@@ -78,7 +78,7 @@ const TaskLister = new Vue({
 			this.storeData()
 		},
 		clearList: function() {
-			if (confirm('Are you sure you want to clear the list? This is unreversable.')) {
+			if (confirm('Are you sure you want to clear the list? This is irreversible.')) {
 				this.taskList = []
 				this.hasTask = 0
 				this.storeData()
