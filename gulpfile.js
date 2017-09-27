@@ -12,6 +12,7 @@ let noop = require('gulp-noop')
 let sass = require('gulp-sass')
 let sourcemaps = require('gulp-sourcemaps')
 let autoprefixer = require('gulp-autoprefixer')
+let uncss = require('gulp-uncss')
 
 // For Js
 let babel = require("gulp-babel")
@@ -23,6 +24,9 @@ let jsonminify = require('gulp-jsonminify')
 
 // For Images
 let imagemin = require('gulp-imagemin')
+
+// For HTML
+var cleanhtml = require('gulp-cleanhtml')
 
 // Define I/O paths
 let path = {
@@ -119,7 +123,7 @@ gulp.task('clean:dist', function() {
 // HTML files
 gulp.task('html', function() {
 	gulp.src([path.html.i])
-		// Perform minification tasks, etc here
+		.pipe((envProd) ? cleanhtml() : noop())
 		.pipe(gulp.dest(path.html.o))
 })
 
@@ -155,9 +159,10 @@ gulp.task('txt', function() {
 // Scss
 gulp.task('sass', function() {
 	return gulp.src(path.css.i)
-		.pipe(sourcemaps.init())
+		.pipe((!envProd) ? sourcemaps.init() : noop())
 		.pipe(sass(sassOptions).on('error', sass.logError))
-		.pipe(sourcemaps.write())
+		.pipe((!envProd) ? sourcemaps.write() : noop())
+		.pipe((envProd) ? uncss({html: ['src/index.html']}) : noop())
 		.pipe(autoprefixer((envProd) ? autoprefixerOptions : noop()))
 		.pipe(gulp.dest(path.css.o))
 })
@@ -165,7 +170,7 @@ gulp.task('sass', function() {
 // Javascript
 gulp.task('js', function() {
 	gulp.src(path.js.i)
-		.pipe(sourcemaps.init())
+		.pipe((!envProd) ? sourcemaps.init() : noop())
 		.pipe(concat('app.js'))
 		.pipe(babel({
 			presets: ['es2015'],
@@ -173,6 +178,6 @@ gulp.task('js', function() {
 		}))
 		.pipe((envProd) ? stripDebug() : noop())
 		.pipe((envProd) ? strip() : noop())
-		.pipe(sourcemaps.write('.'))
+		.pipe((!envProd) ? sourcemaps.write('.') : noop())
 		.pipe(gulp.dest(path.js.o))
 })
